@@ -1,24 +1,19 @@
 <?php
 
 return [
-    'home' => 'الرئيسيه',
+    'dashboard' => 'الرئيسيه',
     'logout' => 'تسجيل الخروج',
-    'status' => 'الحاله',
-    'add' => 'اضافه جديد',
+
+    'add' => 'اضف',
     'create' => 'اضافه',
-    'read' => 'قراءه',
+    'read' => 'عرض',
     'edit' => 'تعديل',
-    'update' => 'تحديث',
+    'update' => 'تعديل',
     'delete' => 'حذف',
     'search' => 'بحث',
     'show' => 'عرض',
     'loading' => 'جاري التحميل',
-    'print' => 'طباعه',
-
-    'title' => 'محل بيع',
-    'titlesm' => 'بيع',
-
-    'copyrights' => 'محل بيع@كافه الحقوق محفوظه',
+    'print' => 'طبع',
 
     'confirm_delete' => 'تاكيد الحذف',
     'yes' => 'نعم',
@@ -38,117 +33,50 @@ return [
 
     'clients' => 'العملاء',
     'client_name' => 'اسم العميل',
-   
-    'suppliers' => 'الموردين',
-    'supp_name' => 'اسم المورد',
-
-   
     'phone' => 'التلفون',
-    'notes' => 'ملاحظات',
     'address' => 'العنوان',
-    'previous_orders' => 'الطلبيات السابقه',
-   
-    'orders_suppliers' => 'طلبيات الموردين',
-
-    'orders' => 'طلبيات العملاء',
-
-    'orders_suppliers_return' => 'مرتجعات للموردين',
-
-    'orders_return' => 'مرتجعات من العملاء',
-
+    'previous_orders' => 'الطلبات السابقه',
+    'orders' => 'الطلبات',
     'add_order' => 'اضف طلب',
-    'add_order_return' => ' اضف طلب مرتجع',
-
     'edit_order' => 'تعديل طلب',
-    'edit_order_return' => 'تعديل اذن مرتجع',
 
-    'users' => 'المستخدمين',
-    'roles' => 'ادوار المستخدمين',
-
+    'users' => 'المشرفين',
     'first_name' => 'الاسم الاول',
     'last_name' => 'الاسم الاخير',
     'email' => 'البريد الاكتروني',
     'image' => 'صوره',
-    'action' => 'الاجراءات',
+    'action' => 'اكشن',
 
     'permissions' => 'الصلاحيات',
-    
 
-    'categories' => 'المجموعات',
-    'all_categories' => 'كل المجموعات',
-   
-    'all_clients' => 'كل العملاء',
-
-
+    'categories' => 'الاقسام',
+    'all_categories' => 'كل الاقسام',
     'name' => 'الاسم',
     'description' => 'الوصف',
-    'products_count' => 'عددالمنتجات',
+    'products_count' => 'عدد الامنتجات',
     'related_products' => 'المنتجات المرتبطه',
     'category' => 'القسم',
     'show_products' => 'عرض المنتجات',
     'created_at' => 'تم اضافته',
-    
-    'addcateg'=> ' مجموعه جديده ',
-     'addprod' =>' صنف جديد ',
-   
-     'products' => 'الأصناف',
-    'product' => 'الصنف',
+
+    'products' => 'المنتجات',
+    'product' => 'المنتج',
     'quantity' => 'الكميه',
     'total' => 'المجموع',
     'purchase_price' => 'سعر الشراء',
     'price' => 'السعر',
-    'total' => 'الاجمالي',
-    'sale_price' => 'سعر تجزئه',
-    'sale_goml' => 'اقل سعر',
-    'sale_havegoml' => 'سعر  جمله',
-    'prod_stores' => 'محازن الاصناف',
-    'first_stock' => 'الرصيد الافتتاحي',
-    'edit_stock' => 'تعديل المخازن',
-
-    'total_sales'=> 'اجمالي بيع',
-    'total_purch'=> ' اجمالي شراء',
-    'total_sales_return'=> 'مرتجع من عميل',
-    'total_purch_return'=> 'مرتجع لمورد',
-
-    'stock' => 'الرصيد',
+    'sale_price' => 'سعر البيع',
+    'stock' => 'المخزن',
     'profit_percent' => 'المكسب',
-    'load_prods' => 'نحميل الاصناف',
 
     'ar' => [
-        'name' => 'الاسم باللغه العربيه',
-        'description' => 'الوصف باللغه العربيه',
-        'address' => 'العنوان باللغه العربيه',
-        'title' => 'عنوان الموضوع باللغه العربيه',
-        'content' => 'المحتوي باللغه العربيه',
-        'notes' => 'ملاحظات باللغه العربيه',
-
+        'name' => 'الاسم بالغه العربيه',
+        'description' => 'الوصف بالغه العربيه',
     ],
 
     'en' => [
-        'name' => 'الاسم باللغه الانجليزيه',
-        'description' => 'الوصف باللغه الانجليزيه',
-        'address' => 'العنوان باللغه الانجليزيه',
-        'title' => 'عنوان الموضوع باللغه الانجليزيه',
-        'content' => 'المحتوي باللغه الانجليزيه',
-        'notes' => 'ملاحظات باللغه الانجليزيه',
-
-
+        'name' => 'الاسم بالغه الانجليزيه',
+        'description' => 'الوصف بالغه الانجليزيه',
     ],
-
-
-    
-    'stores' => 'المخازن',
-    'all_stores' => 'كل المخازن',
-    'store' => 'المخزن',
-
-
-    'disc1' => 'خصم 1',
-    'disc2' => 'خصم 2',
-    'disc3' => 'خصم 3',
-    'adds1' => 'اضافه 1',
-    'adds2' => 'اضاقه 2',
-    'order_date' => 'تاريخ الطلب',
-    'transport' => 'شحن',
-
 
 ];

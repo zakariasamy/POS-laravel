@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'home' => 'Home Page',
+    'dashboard' => 'Home Page',
     'logout' => 'Log Out',
     'status' => 'Status',
 
@@ -16,9 +16,9 @@ return [
     'loading' => 'Loading',
     'print' => 'Print',
    
-    'titlesm' => 'POS',
-    'title' => 'POS-laravel',
-    'copyrights' => 'POS-laravel@All Rhights Reserved',
+    'titlesm' => 'A.CR',
+    'title' => 'Arabic Creative Programming',
+    'copyrights' => 'Arabic Creative Programming@All Rhights Reserved',
 
     'confirm_delete' => 'Confirm Delete',
     'yes' => 'Yes',

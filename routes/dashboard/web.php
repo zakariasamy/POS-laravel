@@ -6,10 +6,10 @@ Route::group([
     ], function(){
 
 
-    Route::group(['prefix' => 'dashboard'], function () {
+    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 
-        Route::get('index', 'DashboardController@index')->name('dashboard.welcome'); // The name is dashboard.index
-
+        Route::get('index', 'DashboardController@index')->name('welcome'); // The name is dashboard.index
+        Route::resource('users', 'UserController')->except(['show']);
     });
 
 });

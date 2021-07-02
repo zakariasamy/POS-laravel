@@ -145,7 +145,18 @@ return [
     */
 
     'attributes' => [
-        'first_name' => 'first name'
+        'first_name' => 'first name',
+        'ar' => [
+            'name' => 'arabic Name',
+            'title' => 'arabic Title',
+            'description' => 'arabic Description',
+        ],
+
+        'en' => [
+            'name' => 'English name',
+            'title' => 'English title',
+            'description' => 'English Description',
+        ],
     ],
 
 ];

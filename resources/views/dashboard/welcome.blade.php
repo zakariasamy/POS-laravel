@@ -18,7 +18,7 @@
             <div class="row">
 
               <div class="content-wrapper">
-                  Welcome to dashboard
+                  @lang('site.welcome')
               </div>
             </div><!-- end of row -->
 

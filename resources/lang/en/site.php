@@ -4,7 +4,7 @@ return [
     'dashboard' => 'Home Page',
     'logout' => 'Log Out',
     'status' => 'Status',
-
+    'home' => 'Home page',
     'add' => 'Add',
     'create' => 'Create New',
     'read' => 'View',
@@ -15,7 +15,7 @@ return [
     'show' => 'Show',
     'loading' => 'Loading',
     'print' => 'Print',
-   
+    'welcome' => 'welcome to Dashboard',
     'titlesm' => 'A.CR',
     'title' => 'Arabic Creative Programming',
     'copyrights' => 'Arabic Creative Programming@All Rhights Reserved',
@@ -45,7 +45,7 @@ return [
     'phone' => 'Tel',
     'address' => 'Address',
     'previous_orders' => 'Previous Orders',
-    
+
     'orders_suppliers' => 'Suppliers Orders',
 
     'orders' => 'Customers Orders',
@@ -56,7 +56,6 @@ return [
 
     'users' => 'Users',
     'roles' => 'User Roles',
-
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
     'email' => 'Email',
@@ -64,7 +63,7 @@ return [
     'action' => 'Action',
 
     'permissions' => 'Permissions',
-    
+
 
     'categories' => 'Categories',
     'all_categories' => 'All Categories',

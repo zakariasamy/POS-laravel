@@ -25,8 +25,6 @@
 
                 <div class="box-body">
 
-                    @include('partials._errors')
-
                     <form action="{{ route('dashboard.users.store') }}" method="post" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
@@ -35,16 +33,25 @@
                         <div class="form-group">
                             <label>@lang('site.first_name')</label>
                             <input type="text" name="first_name" class="form-control" value="{{ old('first_name') }}">
+                            @error('first_name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>@lang('site.last_name')</label>
                             <input type="text" name="last_name" class="form-control" value="{{ old('last_name') }}">
+                            @error('last_name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>@lang('site.email')</label>
                             <input type="email" name="email" class="form-control" value="{{ old('email') }}">
+                            @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -53,12 +60,18 @@
                         </div>
 
                         <div class="form-group">
-                            <img src="{{ asset('uploads/user_images/default.png') }}"  style="width: 100px" class="img-thumbnail image-preview" alt="">
+                            <img src="{{ asset('assets/user_images/default.png') }}"  style="width: 100px" class="img-thumbnail image-preview" alt="">
                         </div>
+                        @error('image')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
 
                         <div class="form-group">
                             <label>@lang('site.password')</label>
                             <input type="password" name="password" class="form-control">
+                            @error('password')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -98,7 +111,9 @@
                                 </div><!-- end of tab content -->
 
                             </div><!-- end of nav tabs -->
-
+                            @error('permissions')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">

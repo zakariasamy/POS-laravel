@@ -25,26 +25,34 @@
 
                 <div class="box-body">
 
-                    @include('partials._errors')
 
                     <form action="{{ route('dashboard.users.update', $user->id) }}" method="post" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
                         {{ method_field('put') }}
-
+                        <input type="hidden" name="id" value="{{$user->id}}">
                         <div class="form-group">
                             <label>@lang('site.first_name')</label>
                             <input type="text" name="first_name" class="form-control" value="{{ $user->first_name }}">
+                            @error('first_name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>@lang('site.last_name')</label>
                             <input type="text" name="last_name" class="form-control" value="{{ $user->last_name }}">
+                            @error('last_name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>@lang('site.email')</label>
                             <input type="email" name="email" class="form-control" value="{{ $user->email }}">
+                            @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -53,7 +61,10 @@
                         </div>
 
                         <div class="form-group">
-                            <img src="{{ $user->image_path }}" style="width: 100px" class="img-thumbnail image-preview" alt="">
+                            <img src="{{ $user->image }}" style="width: 100px" class="img-thumbnail image-preview" alt="">
+                            @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -89,7 +100,9 @@
                                 </div><!-- end of tab content -->
 
                             </div><!-- end of nav tabs -->
-
+                            @error('permissions')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">

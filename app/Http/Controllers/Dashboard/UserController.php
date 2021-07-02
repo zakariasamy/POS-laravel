@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dashboard\CreateUserRequest;
+use App\Http\Requests\Dashboard\UpdateUserRequest;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        //create read update delete
+        //make the function create only avalible for user has (user-create) permission handled by
+        // laratrust package
         $this->middleware(['permission:users-create'])->only('create');
         $this->middleware(['permission:users-read'])->only('index');
         $this->middleware(['permission:users-update'])->only('edit');
         $this->middleware(['permission:users-delete'])->only('destroy');
 
-    }//end of constructor
+    }
 
     public function index(Request $request)
     {
@@ -35,17 +39,16 @@ class UserController extends Controller
 
         return view('dashboard.users.index', compact('users'));
 
-    }//end of index
+    }
 
-    public
-    function create()
+    public function create()
     {
         return view('dashboard.users.create');
 
-    }//end of create
+    }
 
-    public
-    function store(CreateUserRequest $request)
+
+    public function store(CreateUserRequest $request)
     {
 
         $request_data = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
@@ -53,11 +56,12 @@ class UserController extends Controller
 
         if ($request->image) {
 
+            // Save image with width 300 and height relative to the width using intervention Package
             Image::make($request->image)
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(public_path('uploads/user_images/' . $request->image->hashName()));
+                ->save(public_path('assets/user_images/' . $request->image->hashName()));
 
             $request_data['image'] = $request->image->hashName();
 
@@ -80,7 +84,7 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
 
         $request_data = $request->except(['permissions', 'image']);
@@ -89,19 +93,20 @@ class UserController extends Controller
 
             if ($user->image != 'default.png') {
 
-                Storage::disk('public_uploads')->delete('/user_images/' . $user->image);
+            $image = Str::after($user->image, 'user_images/');
+            Storage::disk('user_images')->delete('/' . $image);
 
-            }//end of inner if
+            }
 
             Image::make($request->image)
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(public_path('uploads/user_images/' . $request->image->hashName()));
+                ->save(public_path('assets/user_images/' . $request->image->hashName()));
 
             $request_data['image'] = $request->image->hashName();
 
-        }//end of external if
+        }
 
         $user->update($request_data);
 
@@ -114,15 +119,16 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->image != 'default.png') {
+            $image = Str::after($user->image, 'user_images/');
+            Storage::disk('user_images')->delete('/' . $image);
 
-            Storage::disk('public_uploads')->delete('/user_images/' . $user->image);
+        }
 
-        }//end of if
-
+        // the package handles that when we delete the user it deletes its permissions
         $user->delete();
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('dashboard.users.index');
 
     }
 
-}//end of controller
+}

@@ -6,7 +6,7 @@ Route::group([
     ], function(){
 
 
-    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'auth'], function () {
 
         Route::get('index', 'DashboardController@index')->name('welcome'); // The name is dashboard.index
         Route::resource('users', 'UserController')->except(['show']);

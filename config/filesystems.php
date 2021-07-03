@@ -60,6 +60,11 @@ return [
             'root' =>  public_path('assets/user_images'),
         ],
 
+        'product_images' => [
+            'driver' => 'local',
+            'root' =>  public_path('assets/product_images'),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

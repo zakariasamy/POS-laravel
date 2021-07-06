@@ -9,9 +9,19 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dashboard\ProductCreateRequest;
+use App\Http\Requests\Dashboard\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        // laratrust package
+        $this->middleware(['permission:products-create'])->only('create');
+        $this->middleware(['permission:products-read'])->only('index');
+        $this->middleware(['permission:products-update'])->only('edit');
+        $this->middleware(['permission:products-delete'])->only('destroy');
+
+    }
     public function index(Request $request)
     {
 
@@ -80,7 +90,7 @@ class ProductController extends Controller
 
             if ($product->image != 'default.png') {
 
-                Storage::disk('product_images')->delete('/' . $image);
+                Storage::disk('product_images')->delete('/' . $product->image);
 
             }
 

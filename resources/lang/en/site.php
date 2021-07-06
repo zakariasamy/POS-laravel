@@ -42,7 +42,7 @@ return [
     'suppliers' => 'Suppliers',
     'supp_name' => 'Supplier Name',
 
-    'phone' => 'Tel',
+    'phone' => 'Phone number',
     'address' => 'Address',
     'previous_orders' => 'Previous Orders',
 

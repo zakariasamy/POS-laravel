@@ -146,6 +146,8 @@ return [
 
     'attributes' => [
         'first_name' => 'first name',
+        'phone.0' => 'Mobile phone',
+        'phone.1' => 'Mobile phone',
         'ar' => [
             'name' => 'arabic Name',
             'title' => 'arabic Title',

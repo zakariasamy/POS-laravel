@@ -13,10 +13,10 @@ class ClientController extends Controller
     public function __construct()
     {
         // laratrust package
-        //$this->middleware(['permission:clients-create'])->only('create');
-        //$this->middleware(['permission:clients-read'])->only('index');
-        //$this->middleware(['permission:clients-update'])->only('edit');
-        //$this->middleware(['permission:clients-delete'])->only('destroy');
+        $this->middleware(['permission:clients-create'])->only('create');
+        $this->middleware(['permission:clients-read'])->only('index');
+        $this->middleware(['permission:clients-update'])->only('edit');
+        $this->middleware(['permission:clients-delete'])->only('destroy');
 
     }
 

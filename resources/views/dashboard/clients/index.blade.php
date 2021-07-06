@@ -37,8 +37,6 @@
                                 @else
                                     <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                 @endif
-                                {{auth()->user()}}
-                                {{auth()->user()->isAbleTo('categories-create')}}
                             </div>
 
                         </div>

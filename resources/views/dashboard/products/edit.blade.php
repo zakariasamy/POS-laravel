@@ -22,7 +22,6 @@
                 </div><!-- end of box header -->
                 <div class="box-body">
 
-                    @include('partials._errors')
 
                     <form action="{{ route('dashboard.products.update', $product->id) }}" method="post" enctype="multipart/form-data">
 
@@ -37,17 +36,26 @@
                                     <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
+                            @error('category_id')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         @foreach (config('translatable.locales') as $locale)
                             <div class="form-group">
                                 <label>@lang('site.' . $locale . '.name')</label>
                                 <input type="text" name="{{ $locale }}[name]" class="form-control" value="{{ $product->name }}">
+                                @error($locale . '.name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label>@lang('site.' . $locale . '.description')</label>
                                 <textarea name="{{ $locale }}[description]" class="form-control ckeditor">{{ $product->description }}</textarea>
+                                @error($locale . '.description')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                         @endforeach
@@ -55,6 +63,9 @@
                         <div class="form-group">
                             <label>@lang('site.image')</label>
                             <input type="file" name="image" class="form-control image">
+                            @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
@@ -64,16 +75,25 @@
                         <div class="form-group">
                             <label>@lang('site.purchase_price')</label>
                             <input type="number" name="purchase_price" step="0.01" class="form-control" value="{{ $product->purchase_price }}">
+                            @error('purchase_price')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>@lang('site.sale_price')</label>
                             <input type="number" name="sale_price" step="0.01" class="form-control" value="{{ $product->sale_price }}">
+                            @error('sale_price')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>@lang('site.stock')</label>
                             <input type="number" name="stock" class="form-control" value="{{ $product->stock}}">
+                            @error('stock')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">

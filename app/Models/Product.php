@@ -27,7 +27,7 @@ class Product extends Model
 
     public function getProfitPercentAttribute($purchase_price){
 
-        $profit =  $this->purchase_price - $this->sale_price;
+        $profit =   $this->sale_price - $this->purchase_price;
         $percent = ( $profit / $this->purchase_price ) * 100;
         return  number_format($percent, 2); // if profit percent 2.22254 - it will be shown 2.22
 

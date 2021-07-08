@@ -24,7 +24,7 @@
             @endif
 
 
-            @if (auth()->user()->hasPermission('orders-read'))
+            @if (auth()->user()->hasPermission('orders1-read'))
                 <li><a href="{{ route('dashboard.orders.index') }}"><i class="fa fa-th"></i><span>@lang('site.orders')</span></a></li>
             @endif
             @if (auth()->user()->hasPermission('clients-read'))

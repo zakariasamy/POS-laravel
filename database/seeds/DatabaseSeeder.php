@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         // we create the roles first then we create users which is linked to roles
         $this->call(LaratrustSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(CategorySeeder::class);
     }
 }

@@ -23,7 +23,6 @@ class ClientController extends Controller
     public function index(Request $request)
     {
 
-
         $clients = Client::when($request->search, function ($q) use ($request) {
 
             return $q->where('name', 'like', '%' . $request->search . '%')

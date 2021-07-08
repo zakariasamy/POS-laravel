@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 
@@ -30,6 +31,10 @@ class Product extends Model
         $percent = ( $profit / $this->purchase_price ) * 100;
         return  number_format($percent, 2); // if profit percent 2.22254 - it will be shown 2.22
 
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class, 'product_order');
     }
 
 

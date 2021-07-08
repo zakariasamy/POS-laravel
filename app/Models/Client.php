@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
@@ -10,5 +11,11 @@ class Client extends Model
     protected $casts = [
         'phone' => 'array'
     ];
+
+    public function orders(){
+
+        return $this->hasMany(Order::class);
+
+    }
 
 }

@@ -32,7 +32,7 @@
                         <div class="box-body">
 
                             @foreach ($categories as $category)
-                                
+
                                 <div class="panel-group">
 
                                     <div class="panel panel-info">
@@ -157,7 +157,6 @@
                             <div class="box-body">
 
                                 @foreach ($orders as $order)
-
                                     <div class="panel-group">
 
                                         <div class="panel panel-success">

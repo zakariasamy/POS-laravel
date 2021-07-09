@@ -266,7 +266,7 @@
 
 {{--custom js--}}
 <script src="{{ asset('dashboard_files/js/custom/image_preview.js') }}"></script>
-<script src="{{ asset('dashboard_files/js/custom/order.js') }}"></script>
+<script src="{{ asset('dashboard_files/js/custom/orders.js') }}"></script>
 
 <script>
 

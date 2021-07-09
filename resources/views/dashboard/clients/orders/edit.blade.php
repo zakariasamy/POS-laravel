@@ -131,6 +131,8 @@
                                         <tr>
                                             <td>{{ $product->name }}</td>
                                             <td><input type="number" name="products[{{ $product->id }}][quantity]" data-price="{{ number_format($product->sale_price, 2) }}" class="form-control input-sm product-quantity" min="1" value="{{ $product->pivot->quantity }}"></td>
+                                            <td><input type="double" name="products[{{ $product->id }}][price]"  class="form-control input-sm product-price1" min="0" value={{$product->pivot->price}}></td>
+
                                             <td class="product-price">{{ number_format($product->sale_price * $product->pivot->quantity, 2) }}</td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm remove-product-btn" data-id="{{ $product->id }}"><span class="fa fa-trash"></span></button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Exception;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +18,6 @@ class ClientController extends Controller
         $this->middleware(['permission:clients-read'])->only('index');
         $this->middleware(['permission:clients-update'])->only('edit');
         $this->middleware(['permission:clients-delete'])->only('destroy');
-
     }
 
     public function index(Request $request)
@@ -40,43 +40,51 @@ class ClientController extends Controller
 
     public function store(ClientRequest $request)
     {
+        try {
+            $request_data = $request->all();
+            // Because the second field of phone is not required we use filter to remove null values
+            $request_data['phone'] = array_filter($request->phone);
 
-        $request_data = $request->all();
-        // Because the second field of phone is not required we use filter to remove null values
-        $request_data['phone'] = array_filter($request->phone);
+            Client::create($request_data);
 
-        Client::create($request_data);
-
-        session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('dashboard.clients.index');
-
+            session()->flash('success', __('site.added_successfully'));
+            return redirect()->route('dashboard.clients.index');
+        } catch (Exception $ex) {
+            session()->flash('fail', __('site.fail'));
+            return redirect()->route('dashboard.clients.index');
+        }
     }
 
     public function edit(Client $client)
     {
 
         return view('dashboard.clients.edit', compact('client'));
-
     }
 
     public function update(ClientRequest $request, Client $client)
     {
+        try {
+            $request_data = $request->all();
+            $request_data['phone'] = array_filter($request->phone);
 
-        $request_data = $request->all();
-        $request_data['phone'] = array_filter($request->phone);
-
-        $client->update($request_data);
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('dashboard.clients.index');
-
+            $client->update($request_data);
+            session()->flash('success', __('site.updated_successfully'));
+            return redirect()->route('dashboard.clients.index');
+        } catch (Exception $ex) {
+            session()->flash('fail', __('site.fail'));
+            return redirect()->route('dashboard.clients.index');
+        }
     }
 
     public function destroy(Client $client)
     {
-        $client->delete();
-        session()->flash('success', __('site.deleted_successfully'));
-        return redirect()->route('dashboard.clients.index');
-
+        try {
+            $client->delete();
+            session()->flash('success', __('site.deleted_successfully'));
+            return redirect()->route('dashboard.clients.index');
+        } catch (Exception $ex) {
+            session()->flash('fail', __('site.fail'));
+            return redirect()->route('dashboard.clients.index');
+        }
     }
-
 }

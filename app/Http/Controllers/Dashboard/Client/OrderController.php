@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\Client;
 
+use Exception;
 use App\Models\Order;
 use App\Models\Client;
 use App\Models\Product;
@@ -19,11 +20,12 @@ class OrderController extends Controller
         $categories = Category::with('products')->get(); // so the user can choose cat & show the prods in that cat
         $orders = $client->orders()->with('products')->paginate(5);
         return view('dashboard.clients.orders.create', compact('client', 'categories', 'orders'));
+
     }
 
     public function store(Request $request, Client $client)
     {
-
+        try{
         $request->validate([
             'products' => 'required|array',
         ]);
@@ -32,6 +34,13 @@ class OrderController extends Controller
         DB::commit();
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.orders.index');
+        }
+
+        catch(Exception $ex){
+            DB::rollback();
+            session()->flash('fail', __('site.fail'));
+            return redirect()->route('dashboard.orders.index');
+        }
     }
 
     public function edit(Client $client, Order $order)
@@ -42,10 +51,9 @@ class OrderController extends Controller
     } //end of edit
 
     public function update(Request $request, Client $client, Order $order)
-    {   //return $order->products;
+    {
 
-
-        //dd($request->products);
+        try{
         $request->validate([
             'products' => 'required|array',
         ]);
@@ -56,13 +64,21 @@ class OrderController extends Controller
         DB::commit();
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.orders.index');
+
+        catch(Exception $ex){
+            DB::rollback();
+            session()->flash('fail', __('site.fail'));
+            return redirect()->route('dashboard.orders.index');
+        }
+    }
+
     } //end of update
 
 
 
     private function attach_order($request, $client)
     {
-        //dd($request->products);
+
         $total_price = 0;
 
         foreach ($request->products as $id => $quantity) {
@@ -85,7 +101,7 @@ class OrderController extends Controller
 
     private function update_order($request, $client, $order)
     {
-
+        // get order_products to get quantity of each product
         $products = $order->products;
 
         $total_price = 0;
@@ -116,7 +132,7 @@ class OrderController extends Controller
 
         } //end of foreach
 
-        // attach products for that order created for client
+
         $order->products()->sync($request->products);
         $order->update([
             'total_price' => $total_price

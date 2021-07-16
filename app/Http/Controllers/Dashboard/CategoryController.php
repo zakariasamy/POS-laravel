@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Exception;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -19,7 +20,6 @@ class CategoryController extends Controller
         $this->middleware(['permission:categories-read'])->only('index');
         $this->middleware(['permission:categories-update'])->only('edit');
         $this->middleware(['permission:categories-delete'])->only('destroy');
-
     }
 
     public function index(Request $request)
@@ -38,31 +38,38 @@ class CategoryController extends Controller
     {
 
         return view('dashboard.categories.create');
-
     }
 
     public function store(CategoryCreateRequest $request)
     {
+        try {
 
-        Category::create($request->all());
-        session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('dashboard.categories.index');
+            Category::create($request->all());
+            session()->flash('success', __('site.added_successfully'));
+            return redirect()->route('dashboard.categories.index');
+        } catch (Exception $ex) {
+            session()->flash('fail', __('site.fail'));
+            return redirect()->route('dashboard.categories.index');
+        }
     }
 
     public function edit(Category $category)
     {
 
         return view('dashboard.categories.edit', compact('category'));
-
     }
 
     public function update(CategoryUpdateRequest $request, Category $category)
     {
 
         $category->update($request->all());
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('dashboard.categories.index');
-
+        try {
+            session()->flash('success', __('site.updated_successfully'));
+            return redirect()->route('dashboard.categories.index');
+        } catch (Exception $ex) {
+            session()->flash('fail', __('site.fail'));
+            return redirect()->route('dashboard.categories.index');
+        }
     }
 
     public function destroy(Category $category)

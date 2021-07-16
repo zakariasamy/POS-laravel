@@ -26,6 +26,7 @@ return [
     'added_successfully' => 'تم اضافه البيانات بنجاح',
     'updated_successfully' => 'تم تعديل البيانات بنجاح',
     'deleted_successfully' => 'تم حذف البيانات بنجاح',
+    'fail' => 'حدث خطأ، برجاء إعادة المحاولة',
 
     'no_data_found' => 'للاسف لا يوجد اي سجلات',
     'no_records' => 'للاسف لا يوجد اي سجلات',

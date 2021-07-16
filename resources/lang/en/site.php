@@ -32,7 +32,7 @@ return [
     'added_successfully' => 'Data Added Successfully',
     'updated_successfully' => 'Data Updated Successfully',
     'deleted_successfully' => 'Data Deleted Successfully',
-
+    'fail' => 'Error, Please try again',
     'no_data_found' => 'Sorry No Data Found',
     'no_records' => 'Sorry No Records Found',
 

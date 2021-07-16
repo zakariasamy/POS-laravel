@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
@@ -26,9 +27,9 @@ class OrderController extends Controller
         $request->validate([
             'products' => 'required|array',
         ]);
-
+        DB::beginTransaction();
         $this->attach_order($request, $client);
-
+        DB::commit();
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.orders.index');
     }
@@ -41,16 +42,18 @@ class OrderController extends Controller
     } //end of edit
 
     public function update(Request $request, Client $client, Order $order)
-    {
+    {   //return $order->products;
+
+
         //dd($request->products);
         $request->validate([
             'products' => 'required|array',
         ]);
+        DB::beginTransaction();
 
-        $this->detach_order($order);
+        $this->update_order($request, $client, $order);
 
-        $this->attach_order($request, $client);
-
+        DB::commit();
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.orders.index');
     } //end of update
@@ -63,13 +66,14 @@ class OrderController extends Controller
         $total_price = 0;
 
         foreach ($request->products as $id => $quantity) {
-            $request->products;
+
             $product = Product::FindOrFail($id);
             $total_price += $product->sale_price * $quantity['quantity'];
 
             $product->update([
                 'stock' => $product->stock - $quantity['quantity']
             ]);
+
         } //end of foreach
 
         // create order for the client
@@ -79,15 +83,44 @@ class OrderController extends Controller
         $order->products()->attach($request->products);
     }
 
-    private function detach_order($order)
+    private function update_order($request, $client, $order)
     {
-        foreach ($order->products as $product) {
 
-            $product->update([
-                'stock' => $product->stock + $product->pivot->quantity
-            ]);
-        }
+        $products = $order->products;
 
-        $order->delete();
+        $total_price = 0;
+        foreach ($request->products as $id => $quantity) {
+
+            $product = Product::FindOrFail($id);
+            $products->filter(function($prod) use($id){
+                return $prod->id == $id;
+           });
+
+
+            $old_quantity = $products[0]->pivot->quantity;
+            $curr_quantity = $quantity['quantity'];
+            if($curr_quantity > $old_quantity){
+                $plus = $curr_quantity - $old_quantity;
+                $product->update([
+                    'stock' => $product->stock - $plus
+                ]);
+            }
+            else if($curr_quantity < $old_quantity){
+                $minus = $old_quantity - $curr_quantity;
+                $product->update([
+                    'stock' => $product->stock + $minus
+                ]);
+            }
+
+            $total_price += $product->sale_price * $quantity['quantity'];
+
+        } //end of foreach
+
+        // attach products for that order created for client
+        $order->products()->sync($request->products);
+        $order->update([
+            'total_price' => $total_price
+        ]);
     }
+
 }

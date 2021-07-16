@@ -11,7 +11,7 @@ class Product extends Model
     use Translatable;
     protected $translatedAttributes = ['name', 'description'];
     protected $guarded = [];
-    protected $appends = ['images_path', 'profit_percent'];
+    protected $appends = ['image_path', 'profit_percent'];
 
     public function category(){
 
